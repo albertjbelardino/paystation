@@ -39,7 +39,7 @@ public class PayStationImpl implements PayStation {
         }
         if(inserted.containsKey(coinValue)) {
             int curValue = inserted.get(coinValue);
-            inserted.put(coinValue, curValue++);
+            inserted.put(coinValue, curValue+=1);
         }    
         else {
             inserted.put(coinValue, 1);
@@ -65,19 +65,27 @@ public class PayStationImpl implements PayStation {
     }
 
     @Override
-    public void cancel() {
+    public HashMap<Integer, Integer> cancel() {
+        HashMap<Integer, Integer> current = inserted;
         reset();
+        return current;
     }
     
     private void reset() {
         timeBought = insertedSoFar = 0;
+        inserted = new HashMap<Integer, Integer>();
     }
     
     public int empty() {
+        insertedSoFar = 0;
         return insertedSoFar;
     }
     
     public int getInsertedSoFar() {
         return insertedSoFar;
+    }
+    
+    public HashMap<Integer, Integer> getInserted() {
+        return inserted;
     }
 }

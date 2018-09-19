@@ -11,6 +11,7 @@
  */
 package paystation.domain;
 
+import java.util.HashMap;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -150,5 +151,65 @@ public class PayStationImplTest {
     public void emptyReturnsAmount() {
         //return inserted so far when empty is called
         assert(ps.empty() == ps.getInsertedSoFar());
+    }
+    
+    @Test
+    public void cancelWorks() {
+        
+    }
+    
+    @Test 
+    public void emptyResetsToZero() 
+        throws IllegalCoinException {
+        ps.addPayment(5);
+        assert(ps.empty() == 0);
+    }
+    
+    @Test
+    public void callToCancelReturnsMixture() 
+        throws IllegalCoinException {
+        HashMap<Integer, Integer> tester = new HashMap<Integer, Integer>();
+        tester.put(5, 2); tester.put(10, 3); tester.put(25, 4);
+        ps.addPayment(5); ps.addPayment(5);
+        ps.addPayment(10); ps.addPayment(10); ps.addPayment(10);
+        ps.addPayment(25); ps.addPayment(25); ps.addPayment(25); ps.addPayment(25);
+        
+        assertEquals(ps.cancel(), tester);
+    }
+    
+    @Test
+    public void callToCancelDoesNotContainKeyNotEntered() 
+        throws IllegalCoinException {
+        ps.addPayment(5);
+        ps.addPayment(10);
+        
+        assert(!ps.cancel().containsKey(25));
+    }
+    
+    @Test 
+    public void callToCancelClearsMap() 
+        throws IllegalCoinException {
+        ps.addPayment(5);
+        ps.cancel();
+        HashMap tester = new HashMap<Integer, Integer>();
+        assert(ps.getInserted().size() == 0);
+    }
+    
+    @Test 
+    public void callToBuyClearsMap() 
+        throws IllegalCoinException {
+        ps.addPayment(5);
+        ps.buy();
+        HashMap tester = new HashMap<Integer, Integer>();
+        assert(ps.getInserted().size() == 0);
+    }
+    
+    @Test 
+    public void oneCoinEntered()
+            throws IllegalCoinException {
+        ps.addPayment(5);
+        HashMap<Integer, Integer> tester = new HashMap<Integer, Integer>();
+        tester.put(5, 1);
+        assert(tester.get(5) == ps.getInserted().get(5));
     }
 }
