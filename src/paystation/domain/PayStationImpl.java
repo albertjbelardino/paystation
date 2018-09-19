@@ -1,5 +1,7 @@
 package paystation.domain;
 
+import java.util.HashMap;
+
 /**
  * Implementation of the pay station.
  *
@@ -23,6 +25,7 @@ public class PayStationImpl implements PayStation {
     
     private int insertedSoFar;
     private int timeBought;
+    public HashMap<Integer, Integer> inserted = new HashMap<Integer, Integer>();
 
     @Override
     public void addPayment(int coinValue)
@@ -34,8 +37,19 @@ public class PayStationImpl implements PayStation {
             default:
                 throw new IllegalCoinException("Invalid coin: " + coinValue);
         }
+        if(inserted.containsKey(coinValue)) {
+            int curValue = inserted.get(coinValue);
+            inserted.put(coinValue, curValue++);
+        }    
+        else {
+            inserted.put(coinValue, 1);
+        } 
         insertedSoFar += coinValue;
         timeBought = insertedSoFar / 5 * 2;
+    }
+    
+    public int getMapValue(int coinValue) {
+        return inserted.get(coinValue);
     }
 
     @Override
@@ -57,5 +71,13 @@ public class PayStationImpl implements PayStation {
     
     private void reset() {
         timeBought = insertedSoFar = 0;
+    }
+    
+    public int empty() {
+        return insertedSoFar;
+    }
+    
+    public int getInsertedSoFar() {
+        return insertedSoFar;
     }
 }

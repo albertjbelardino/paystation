@@ -50,4 +50,10 @@ public interface PayStation {
      * Cancel the present transaction. Resets the machine for a new transaction.
      */
     public void cancel();
+    
+    public int getMapValue(int coinValue);
+    
+    public int empty();
+    
+    public int getInsertedSoFar();
 }
