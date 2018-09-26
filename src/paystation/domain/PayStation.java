@@ -61,4 +61,6 @@ public interface PayStation {
     public int getInsertedSoFar();
     
     public HashMap<Integer, Integer> getInserted();
+    
+    public void setRateStrategy(RateStrategy rateStrategy);
 }
