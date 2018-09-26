@@ -10,6 +10,7 @@
  */
 package paystation.domain;
 
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -71,5 +72,9 @@ public class Menu {
     public void buyTicket(){
         display();
         ps.buy();
+    }
+    
+    public void cancel(){
+        System.out.println(ps.cancel().toString());
     }
 }
