@@ -37,7 +37,15 @@ public class Menu {
                 case 4:
                     //cancel();
                 case 5:
+<<<<<<< HEAD
                     //changeRateStrategy();
+=======
+                    changeRateStrategy();
+                    break;
+                default:
+                    System.out.println("Invalid input, enter a number from 1-6");
+                    break;
+>>>>>>> 2e1f7a5d51c1982a2a80d1442027f413842e16de
             }
         }
     }
@@ -54,5 +62,14 @@ public class Menu {
         System.out.println("|        4. Cancel                     |");
         System.out.println("|        5. Change Rate Strategy       |");       
         System.out.println("============================");
+    }
+    
+    public void display(){
+        System.out.println("You have purchased " + ps.readDisplay() + " minutes");
+    }
+    
+    public void buyTicket(){
+        display();
+        ps.buy();
     }
 }
