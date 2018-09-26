@@ -43,7 +43,8 @@ public class Menu {
                 case 5:
                     changeRateStrategy();
                     break;
-                case 6:
+                default:
+                    System.out.println("Invalid input, enter a number from 1-6");
                     break;
             }
         }
