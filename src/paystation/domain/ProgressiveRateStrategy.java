@@ -9,6 +9,10 @@ package paystation.domain;
  *
  * @author tug83326
  */
-public class ProgressiveRateStrategy {
+public class ProgressiveRateStrategy implements RateStrategy {
+    
+    public int calculateTime(int insertedSoFar) {
+        return insertedSoFar;
+    }
     
 }

@@ -11,4 +11,6 @@ package paystation.domain;
  */
 public interface RateStrategy {
     
+    public int calculateTime(int insertedSoFar);
+    
 }

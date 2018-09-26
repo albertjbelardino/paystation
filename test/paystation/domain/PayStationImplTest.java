@@ -153,10 +153,6 @@ public class PayStationImplTest {
         assert(ps.empty() == ps.getInsertedSoFar());
     }
     
-    @Test
-    public void cancelWorks() {
-        
-    }
     
     @Test 
     public void emptyResetsToZero() 

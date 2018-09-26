@@ -29,22 +29,15 @@ public class Menu {
             selection = scan.nextInt();
             switch(selection) {
                 case 1:
-                    depositCoins();
-                    break;
+                    //depositCoins();
                 case 2:
-                    display();
-                    break;
+                    //display();
                 case 3:
-                    buyTicket();
-                    break;
+                    //buyTicket();
                 case 4:
-                    cancel();
-                    break;
+                    //cancel();
                 case 5:
-                    changeRateStrategy();
-                    break;
-                case 6:
-                    break;
+                    //changeRateStrategy();
             }
         }
     }

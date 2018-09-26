@@ -25,7 +25,17 @@ public class PayStationImpl implements PayStation {
     
     private int insertedSoFar;
     private int timeBought;
+    private int total = 0;
+    private RateStrategy rateStrategy;
     public HashMap<Integer, Integer> inserted = new HashMap<Integer, Integer>();
+    
+    public PayStationImpl() {
+        rateStrategy = new LinearRateStrategy();
+    }
+    
+    public PayStationImpl(RateStrategy rateStrategy) {
+        this.rateStrategy = rateStrategy;
+    }
 
     @Override
     public void addPayment(int coinValue)
@@ -46,6 +56,7 @@ public class PayStationImpl implements PayStation {
         } 
         insertedSoFar += coinValue;
         timeBought = insertedSoFar / 5 * 2;
+        //timeBought = rateStrategy.calculateTime(insertedSoFar);
     }
     
     public int getMapValue(int coinValue) {
@@ -60,6 +71,7 @@ public class PayStationImpl implements PayStation {
     @Override
     public Receipt buy() {
         Receipt r = new ReceiptImpl(timeBought);
+        total += insertedSoFar;
         reset();
         return r;
     }
@@ -77,8 +89,9 @@ public class PayStationImpl implements PayStation {
     }
     
     public int empty() {
-        insertedSoFar = 0;
-        return insertedSoFar;
+        int previousTotal = total;
+        total = 0;
+        return previousTotal;
     }
     
     public int getInsertedSoFar() {
@@ -87,5 +100,9 @@ public class PayStationImpl implements PayStation {
     
     public HashMap<Integer, Integer> getInserted() {
         return inserted;
+    }
+    
+    public void setRateStrategy(RateStrategy rateStrategy) {
+        this.rateStrategy = rateStrategy;
     }
 }

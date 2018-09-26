@@ -9,6 +9,9 @@ package paystation.domain;
  *
  * @author tug83326
  */
-public class LinearRateStrategy {
+public class LinearRateStrategy implements RateStrategy {
     
+    public int calculateTime(int insertedSoFar) {
+        return insertedSoFar;
+    }
 }
