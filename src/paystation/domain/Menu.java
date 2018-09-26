@@ -63,4 +63,13 @@ public class Menu {
         System.out.println("|        5. Change Rate Strategy       |");       
         System.out.println("============================");
     }
+    
+    public void display(){
+        System.out.println("You have purchased " + ps.readDisplay() + " minutes");
+    }
+    
+    public void buyTicket(){
+        display();
+        ps.buy();
+    }
 }
