@@ -12,7 +12,20 @@ package paystation.domain;
 public class ProgressiveRateStrategy implements RateStrategy {
     
     public int calculateTime(int insertedSoFar) {
-        return insertedSoFar;
+        int timeInMinutes = 0;
+        
+        if(insertedSoFar < 150) {
+            return insertedSoFar / 5 * 2;
+        }
+        else if(insertedSoFar < 350) {
+            timeInMinutes += 60;
+            timeInMinutes += (insertedSoFar - 150) / 5 * 1.5;
+            return timeInMinutes;
+        }
+        else {
+            timeInMinutes += 120;
+            timeInMinutes += (insertedSoFar - 350) / 5;
+            return timeInMinutes;
+        }    
     }
-    
 }

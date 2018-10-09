@@ -12,6 +12,6 @@ package paystation.domain;
 public class LinearRateStrategy implements RateStrategy {
     
     public int calculateTime(int insertedSoFar) {
-        return insertedSoFar;
+        return insertedSoFar / 5 * 2;
     }
 }

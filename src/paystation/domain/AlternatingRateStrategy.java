@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package paystation.domain;
-
+import java.util.Calendar;
 /**
  *
  * @author tug83326
@@ -12,6 +12,9 @@ package paystation.domain;
 public class AlternatingRateStrategy implements RateStrategy {
     
     public int calculateTime(int insertedSoFar) {
-        return insertedSoFar;
+        if(Calendar.DAY_OF_WEEK == 1 || Calendar.DAY_OF_WEEK == 7)
+            return (new ProgressiveRateStrategy()).calculateTime(insertedSoFar);
+        else 
+            return (new LinearRateStrategy()).calculateTime(insertedSoFar);
     }
 }
