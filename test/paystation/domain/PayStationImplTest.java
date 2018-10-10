@@ -208,4 +208,22 @@ public class PayStationImplTest {
         tester.put(5, 1);
         assert(tester.get(5) == ps.getInserted().get(5));
     }
+    
+    @Test 
+    public void progRateYieldsProperMinutes() throws IllegalCoinException {
+        ps.setRateStrategy(new ProgressiveRateStrategy());
+        for(int i = 0; i < 14; i++) //$3.50 entered
+            ps.addPayment(25);
+        
+        assert(ps.readDisplay() == 120);
+    }
+    
+    @Test
+    public void linearRateYieldsProperMinutes() throws IllegalCoinException {
+        ps.setRateStrategy(new LinearRateStrategy());
+        for(int i = 0; i < 14; i++) //$3.50 entered
+            ps.addPayment(25);
+        
+        assert(ps.readDisplay() == 140);
+    }
 }

@@ -10,6 +10,8 @@
  */
 package paystation.domain;
 
+import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -87,7 +89,9 @@ public class Menu {
     }
     
     public void cancel() {
-        ps.cancel();
+        HashMap<Integer, Integer> cancelMap = ps.cancel();
+        for(int key : cancelMap.keySet()) 
+            System.out.println(key + " : " + cancelMap.get(key));
     }
     
     public void changeRateStrategy() {

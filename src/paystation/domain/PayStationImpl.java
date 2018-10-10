@@ -64,6 +64,7 @@ public class PayStationImpl implements PayStation {
 
     @Override
     public int readDisplay() {
+        timeBought = rateStrategy.calculateTime(insertedSoFar);
         return timeBought;
     }
 
